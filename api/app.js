@@ -9,6 +9,10 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 
+// mount api auth routes to app
+const auth_routes = require('./routes/auth');
+app.use('/api/v1/auth', auth_routes);
+
 
 app.get('/', (req, res) => {
 	res.status(200).send({'ping': 'pong'});
