@@ -6,7 +6,7 @@ import GoogleLogin from 'react-google-login';
 function App() {
 
   const handleLogin = async googleData => {
-      const response = await fetch("http:://localhost:3001/api/v1/auth/google", {
+      const response = await fetch("http:://localhost:3001g /api/v1/auth/google", {
         method: "POST",
         body: JSON.stringify({
           token: googleData.tokenId
