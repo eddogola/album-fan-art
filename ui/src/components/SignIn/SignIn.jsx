@@ -1,8 +1,7 @@
-import GoogleLogin from 'react-google-login';
-
 export default function SignIn(props) {
     const handleLogin = async googleData => {
-        const response = await fetch("http:://localhost:3001/api/v1/auth/google", {
+        console.log(googleData)
+        const response = await fetch("http://localhost:3001/api/v1/auth/google", {
           method: "POST",
           body: JSON.stringify({
             token: googleData.tokenId
@@ -19,14 +18,6 @@ export default function SignIn(props) {
         <div className="sign-in">
             {/* normal db sign in */}
             <SignInForm />
-            {/* google sign in */}
-            <GoogleLogin
-            clientId={ process.env.REACT_APP_CLIENT_ID }
-            buttonText="Log in with Google"
-            onSuccess={ handleLogin }
-            onFailure={ handleLogin }
-            cookiePolicy="single_host_origin" 
-            />
         </div>
     )
 }
