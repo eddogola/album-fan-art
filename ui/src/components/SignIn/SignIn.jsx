@@ -1,19 +1,4 @@
-export default function SignIn(props) {
-    const handleLogin = async googleData => {
-        console.log(googleData)
-        const response = await fetch("http://localhost:3001/api/v1/auth/google", {
-          method: "POST",
-          body: JSON.stringify({
-            token: googleData.tokenId
-          }),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
-        const data = await response.json()
-        // store returned user
-    };
-
+export default function SignIn({}) {
     return (
         <div className="sign-in">
             {/* normal db sign in */}
@@ -22,7 +7,7 @@ export default function SignIn(props) {
     )
 }
 
-export function SignInForm(props) {
+export function SignInForm({}) {
     return (
         <div className="signin-form">
             <form action="" method="post">
