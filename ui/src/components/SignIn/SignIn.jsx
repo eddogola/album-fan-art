@@ -27,7 +27,7 @@ export function SignInForm(props) {
         <div className="signin-form">
             <form action="" method="post">
                 <input type="email" name="email" id="email" placeholder="john.doe@email.com" />
-                <input type="password" name="password" id="password" />
+                <input type="password" name="password" id="password" placeholder="password" />
                 <button type="submit">Sign In</button>
             </form>
         </div>
