@@ -1,10 +1,14 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const path = require('path')
 
 const jwtRequired = passport.authenticate('jwt', { session: false });
 
-const router = express.Router();
+const router = express.Router();const dotenv = require('dotenv');
+
+// setup .env config
+dotenv.config({path: path.resolve(__dirname, '.env')});
 
 router.get('/login', passport.authenticate('auth0', {
     scope: 'openid email profile',
@@ -32,8 +36,22 @@ router.get('/callback', (req, res, next) => {
 
 });
 
-router.get('/logout', (req, res) => {
+router.get('/current-session', (req, res) => {
+    passport.authenticate('jwt', { session: false }, (err, user) => {
+        if (err || !user) {
+            res.send(false)
+        } else {
+            res.send(user);
+        }
+    })(req, res);
+});
 
+router.get('/logout', (req, res) => {
+    req.session = null;
+    const homeURL = encodeURIComponent('http://localhost:3000/');
+    res.redirect(
+        `https://${process.env.AUTH0_DOMAIN}/v2/logout?returnTo=${homeURL}&client_id=${process.env.AUTH0_CLIENT_ID}`
+    );
 });
 
 module.exports = router;
