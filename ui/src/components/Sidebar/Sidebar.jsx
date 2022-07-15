@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createApi } from 'unsplash-js';
+import ImageGrid from '../ImageGrid/ImageGrid';
 
 const unsplash = createApi({
     accessKey: process.env.REACT_APP_UNSPLASH_ACCESS_KEY,
@@ -26,7 +27,7 @@ export default function Sidebar(props) {
 
     return (
         <div className="sidebar">
-            { photos.map((pic, idx) => <img src={pic.links.download + "?force=true"} alt={ pic.alt_description } key={ idx }/>) }
+            <ImageGrid photos={ photos } />
         </div>
     )
 }
