@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Sidebar.css';
 import { createApi } from 'unsplash-js';
 import ImageGrid from '../ImageGrid/ImageGrid';
 
