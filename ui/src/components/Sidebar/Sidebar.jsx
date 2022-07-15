@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Sidebar.css';
 import { createApi } from 'unsplash-js';
+import SearchBar from '../SearchBar/SearchBar';
 import ImageGrid from '../ImageGrid/ImageGrid';
 
 const unsplash = createApi({
@@ -28,6 +29,7 @@ export default function Sidebar(props) {
 
     return (
         <div className="sidebar">
+            <SearchBar />
             <ImageGrid photos={ photos } />
         </div>
     )
