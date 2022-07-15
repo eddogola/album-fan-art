@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import './Home.css';
+import Sidebar from '../Sidebar/Sidebar';
 
 export default function Home({ auth }) {
     return (
         <div className="Home">
+            <Sidebar />
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>You are logged in as {auth && auth.nickname ? auth.nickname : null} :)</p>
