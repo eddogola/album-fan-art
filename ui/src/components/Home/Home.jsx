@@ -23,13 +23,25 @@ export default function Home({ auth }) {
             })
         }
     }
+
+    function onClickSticker(sticker) {
+        setActivePhotoURL(sticker.src);
+        if (activePhotoURL !== "") {
+            fabric.Image.fromURL(activePhotoURL, img => {
+                img.scaleToHeight(900);
+                img.scaleToWidth(1200);
+                editor.canvas.add(img);
+            });
+        }
+    }
+
     return (
         <div className="home">
             <Sidebar onClickImage={onClickImage} />
             {/* <h1>You are logged in as {auth && auth.nickname ? auth.nickname : null} :)</h1>
                 <h1><a className='App-header' href={ "/auth/logout" }>Logout</a></h1> */}
             <MainContainer onReady={onReady} editor={editor} />
-            <StickerSidebar />
+            <StickerSidebar onClickSticker={ onClickSticker } />
         </div>
     )
 }

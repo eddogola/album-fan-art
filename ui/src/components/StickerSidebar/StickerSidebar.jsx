@@ -2,8 +2,9 @@ import React from "react";
 import barcode from './barcode.png';
 import parentalAdvisory from './parental-advisory.png';
 import Sticker from "../Sticker/Sticker";
+import './StickerSidebar.css';
 
-export default function StickerSidebar({  }) {
+export default function StickerSidebar({ onClickSticker }) {
     const stickers = [
         {
             'src': barcode,
@@ -17,7 +18,7 @@ export default function StickerSidebar({  }) {
 
     return (
         <div className="sticker-sidebar">
-            { stickers.map((sticker, idx) => <Sticker sticker={ sticker } key={ "sticker-" + idx } />) }
+            { stickers.map((sticker, idx) => <Sticker sticker={ sticker } onClick={ onClickSticker } key={ "sticker-" + idx } />) }
         </div>
     )
 }
