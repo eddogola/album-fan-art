@@ -1,11 +1,11 @@
 import React from "react";
-import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
+import { FabricJSCanvas } from "fabricjs-react";
 import './Canvas.css';
 
-export default function Canvas({ activePhoto, setActivePhoto }) {
+export default function Canvas({ onReady }) {
     return (
         <div className="inner-canvas-container">
-            <FabricJSCanvas className="canvas" />
+            <FabricJSCanvas className="canvas" onReady={ onReady }/>
         </div>
     )
 }

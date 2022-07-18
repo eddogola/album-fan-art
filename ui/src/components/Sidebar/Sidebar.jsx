@@ -9,7 +9,7 @@ const unsplash = createApi({
     }
 )
 
-export default function Sidebar({ setActivePhoto }) {
+export default function Sidebar({ onClickImage }) {
     const [photos, setPhotos] = useState([]);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export default function Sidebar({ setActivePhoto }) {
     return (
         <div className="sidebar">
             <SearchBar />
-            <ImageGrid photos={ photos } setActivePhoto={ setActivePhoto } />
+            <ImageGrid photos={ photos } onClickImage={ onClickImage } />
         </div>
     )
 }
