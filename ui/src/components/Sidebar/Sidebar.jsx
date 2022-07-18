@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { createApi } from 'unsplash-js';
 import SearchBar from '../SearchBar/SearchBar';
@@ -46,20 +46,21 @@ export default function Sidebar({ onClickImage }) {
         { ( photos.length === total && total!== 0 ? (<p>You've seen it all</p>) : "" ) }
     </div>
 
+    const formRef = useRef();
+
     return (
         <div className="sidebar" id='sidebar'>
-            <SearchBar setQuery={ setQuery } setPhotos={ setPhotos } setIsLoading={ setIsLoading } />
+            <SearchBar setQuery={ setQuery } setPhotos={ setPhotos } setIsLoading={ setIsLoading } formRef={ formRef } />
             <InfiniteScroll
                 dataLength={ photos.length }
                 next={ () => getMorePhotos(page + 1) }
                 hasMore={ isLoading }
                 scrollableTarget="sidebar"
             >
-            {/* <ImageGrid photos={ photos } onClickImage={ onClickImage } /> */}
              { photos.length > 0 ? gallery : <p>Sorry, there are no results for <strong>{ query }</strong>, try again!</p> }   
             </InfiniteScroll>
             <button className="topButton" onClick={() => {
-
+                formRef.current.scrollIntoView({behaviour: 'smooth'});
             }}>^</button>
         </div>
     )
