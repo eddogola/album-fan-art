@@ -41,19 +41,22 @@ export default function Sidebar({ onClickImage }) {
         getMorePhotos(1);
     }, [query])
 
+    const gallery = <div className="gallery">
+        <ImageGrid photos={ photos } onClickImage={ onClickImage } />
+        { ( photos.length === total && total!== 0 ? (<p>You've seen it all</p>) : "" ) }
+    </div>
+
     return (
-        <div className="sidebar">
+        <div className="sidebar" id='sidebar'>
             <SearchBar setQuery={ setQuery } setPhotos={ setPhotos } setIsLoading={ setIsLoading } />
             <InfiniteScroll
                 dataLength={ photos.length }
                 next={ () => getMorePhotos(page + 1) }
                 hasMore={ isLoading }
+                scrollableTarget="sidebar"
             >
-                <ImageGrid photos={ photos } onClickImage={ onClickImage } />
-                { photos.length === total && total!== 0 ? 
-                (
-                    <p>You've seen it all</p>
-                ) : "" }
+            {/* <ImageGrid photos={ photos } onClickImage={ onClickImage } /> */}
+             { photos.length > 0 ? gallery : <p>Sorry, there are no results for <strong>{ query }</strong>, try again!</p> }   
             </InfiniteScroll>
             <button className="topButton" onClick={() => {
 
