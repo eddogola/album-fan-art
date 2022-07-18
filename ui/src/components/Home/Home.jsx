@@ -4,6 +4,7 @@ import { useFabricJSEditor } from "fabricjs-react";
 import Sidebar from '../Sidebar/Sidebar';
 import MainContainer from '../MainContainer/MainContainer';
 import StickerSidebar from '../StickerSidebar/StickerSidebar';
+import Footer from '../Footer/Footer';
 import './Home.css';
 
 export default function Home({ auth }) {
@@ -41,6 +42,7 @@ export default function Home({ auth }) {
             {/* <h1>You are logged in as {auth && auth.nickname ? auth.nickname : null} :)</h1>
                 <h1><a className='App-header' href={ "/auth/logout" }>Logout</a></h1> */}
             <MainContainer onReady={onReady} editor={editor} />
+            <Footer />
             <StickerSidebar onClickSticker={ onClickSticker } />
         </div>
     )

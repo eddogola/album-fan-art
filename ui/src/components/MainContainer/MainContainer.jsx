@@ -9,7 +9,6 @@ export default function MainContainer({ onReady, editor }) {
         <div className="main-container">
             <TextBar />
             <WorkingArea onReady={ onReady } editor={ editor } />
-            <Footer />
         </div>
     )
 }
