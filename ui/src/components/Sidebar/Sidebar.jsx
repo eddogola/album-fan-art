@@ -30,7 +30,7 @@ export default function Sidebar({ setActivePhoto }) {
     return (
         <div className="sidebar">
             <SearchBar />
-            <ImageGrid photos={ photos } />
+            <ImageGrid photos={ photos } setActivePhoto={ setActivePhoto } />
         </div>
     )
 }
