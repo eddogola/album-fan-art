@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { fabric } from "fabric";
 import { useFabricJSEditor } from "fabricjs-react";
 import Sidebar from '../Sidebar/Sidebar';
+import TextBar from '../TextBar/TextBar';
 import MainContainer from '../MainContainer/MainContainer';
 import StickerSidebar from '../StickerSidebar/StickerSidebar';
 import Footer from '../Footer/Footer';
@@ -16,12 +17,13 @@ export default function Home({ auth }) {
         setActivePhotoURL(photo.links.download);
         if (activePhotoURL !== "") {
             fabric.Image.fromURL(activePhotoURL, img => {
-                // editor.canvas.setBackgroundImage(img);
-                // editor.canvas.renderAll();
-                img.scaleToHeight(800);
                 img.scaleToWidth(650);
-                editor.canvas.add(img);
+                img.scaleToHeight(800);
+                editor.canvas.setBackgroundImage(img);
+                editor.canvas.renderAll();
+                // editor.canvas.add(img);
             }
+            // TODO: fix CORS error
             // , {"crossOrigin": "anonymous",}
             )
         }
@@ -53,11 +55,20 @@ export default function Home({ auth }) {
         link.click();
     }
 
+    function onAddText() {
+        editor.addText("text");
+    }
+
+    function onDelete() {
+        editor.canvas.remove(editor.canvas.getActiveObject());
+    }
+
     return (
         <div className="home">
             <Sidebar onClickImage={onClickImage} />
             {/* <h1>You are logged in as {auth && auth.nickname ? auth.nickname : null} :)</h1>
                 <h1><a className='App-header' href={ "/auth/logout" }>Logout</a></h1> */}
+            <TextBar onAddText={ onAddText } onDelete={ onDelete } />
             <MainContainer onReady={onReady} editor={editor} />
             <Footer onClick={onClickSaveImage} />
             <StickerSidebar onClickSticker={onClickSticker} />
