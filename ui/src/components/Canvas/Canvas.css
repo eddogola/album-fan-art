@@ -1,5 +1,4 @@
-.canvas > .canvas-container {
-    background-color: #fff;
+.canvas {
     height: 3000px;
     width: 3000px;
 }

@@ -12,12 +12,13 @@ export default function Home({ auth }) {
 
     function onClickImage(photo) {
         setActivePhotoURL(photo.links.download);
-        console.log(activePhotoURL)
         if (activePhotoURL !== "") {
             fabric.Image.fromURL(activePhotoURL, img => {
-        //         // editor.canvas.setBackgroundImage(img);
-        //         // editor.canvas.renderAll();
-                editor.canvas.add(img);
+                editor.canvas.setBackgroundImage(img);
+                editor.canvas.renderAll();
+                // img.scaleToHeight(3000);
+                // img.scaleToWidth(3000);
+                // editor.canvas.add(img);
             })
         }
     }
@@ -27,7 +28,7 @@ export default function Home({ auth }) {
             <main className="canvas-container">
                 <h1>You are logged in as {auth && auth.nickname ? auth.nickname : null} :)</h1>
                 <h1><a className='App-header' href={ "/auth/logout" }>Logout</a></h1>
-                <Canvas onReady={ onReady } />
+                <Canvas onReady={ onReady } editor={ editor } />
             </main>
         </div>
     )
