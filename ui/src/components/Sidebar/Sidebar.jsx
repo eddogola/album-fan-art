@@ -9,7 +9,7 @@ const unsplash = createApi({
     }
 )
 
-export default function Sidebar(props) {
+export default function Sidebar({ setActivePhoto }) {
     const [photos, setPhotos] = useState([]);
 
     useEffect(() => {
