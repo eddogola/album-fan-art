@@ -1,10 +1,11 @@
 import React from "react";
+import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
 import './Canvas.css';
 
 export default function Canvas({  }) {
     return (
-        <canvas className="canvas" height={3000} width={3000}>
-
-        </canvas>
+        <div className="inner-canvas-container">
+            <FabricJSCanvas className="canvas" />
+        </div>
     )
 }
