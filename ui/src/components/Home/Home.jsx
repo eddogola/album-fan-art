@@ -14,11 +14,11 @@ export default function Home({ auth }) {
         setActivePhotoURL(photo.links.download);
         if (activePhotoURL !== "") {
             fabric.Image.fromURL(activePhotoURL, img => {
-                editor.canvas.setBackgroundImage(img);
-                editor.canvas.renderAll();
+                // editor.canvas.setBackgroundImage(img);
+                // editor.canvas.renderAll();
                 // img.scaleToHeight(3000);
                 // img.scaleToWidth(3000);
-                // editor.canvas.add(img);
+                editor.canvas.add(img);
             })
         }
     }
