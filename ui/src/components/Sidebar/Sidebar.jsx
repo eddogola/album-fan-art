@@ -12,7 +12,7 @@ const unsplash = createApi({
 
 export default function Sidebar({ onClickImage }) {
     const [photos, setPhotos] = useState([]);
-    const [query, setQuery] = useState("new");
+    const [query, setQuery] = useState("album");
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
     const [total, setTotal] = useState("");

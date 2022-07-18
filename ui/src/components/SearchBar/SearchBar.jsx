@@ -7,9 +7,14 @@ export default function SearchBar({ setQuery, setPhotos, setIsLoading }) {
             <form method="get">
                 <input type="search" name="search-bar" id="search-bar" placeholder="Search photo"
                 onChange={ (event) => {
-                    setQuery(event.target.value);
-                    setIsLoading(true);
-                    setPhotos([]);
+                    if (event.target.value !== "") {
+                        setQuery(event.target.value);
+                        setIsLoading(true);
+                        setPhotos([]);
+                    } else {
+                        setQuery("album");
+                        setPhotos([]);
+                    }
                 } } />
             </form>
         </div>
