@@ -21,7 +21,9 @@ export default function Home({ auth }) {
                 img.scaleToHeight(800);
                 img.scaleToWidth(650);
                 editor.canvas.add(img);
-            })
+            }
+            // , {"crossOrigin": "anonymous",}
+            )
         }
     }
 
@@ -32,8 +34,23 @@ export default function Home({ auth }) {
                 img.scaleToHeight(90);
                 img.scaleToWidth(160);
                 editor.canvas.add(img);
+            }, 
+            {
+                "crossOrigin": "anonymous",
             });
         }
+    }
+
+    function onClickSaveImage() {
+        const ext = "png";
+        const base64 = editor.canvas.toDataURL({
+            format: ext,
+            enableRetinaScaling: true
+        });
+        const link = document.createElement("a");
+        link.href = base64;
+        link.download = `album-art.${ext}`;
+        link.click();
     }
 
     return (
@@ -42,8 +59,8 @@ export default function Home({ auth }) {
             {/* <h1>You are logged in as {auth && auth.nickname ? auth.nickname : null} :)</h1>
                 <h1><a className='App-header' href={ "/auth/logout" }>Logout</a></h1> */}
             <MainContainer onReady={onReady} editor={editor} />
-            <Footer />
-            <StickerSidebar onClickSticker={ onClickSticker } />
+            <Footer onClick={onClickSaveImage} />
+            <StickerSidebar onClickSticker={onClickSticker} />
         </div>
     )
 }
