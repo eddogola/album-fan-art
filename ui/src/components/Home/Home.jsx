@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { fabric } from "fabric";
 import { useFabricJSEditor } from "fabricjs-react";
 import Sidebar from '../Sidebar/Sidebar';
-import Canvas from '../Canvas/Canvas';
+import MainContainer from '../MainContainer/MainContainer';
+import StickerSidebar from '../StickerSidebar/StickerSidebar';
 import './Home.css';
 
 export default function Home({ auth }) {
@@ -24,12 +25,11 @@ export default function Home({ auth }) {
     }
     return (
         <div className="home">
-            <Sidebar onClickImage={ onClickImage } />
-            <main className="canvas-container">
-                <h1>You are logged in as {auth && auth.nickname ? auth.nickname : null} :)</h1>
-                <h1><a className='App-header' href={ "/auth/logout" }>Logout</a></h1>
-                <Canvas onReady={ onReady } editor={ editor } />
-            </main>
+            <Sidebar onClickImage={onClickImage} />
+            {/* <h1>You are logged in as {auth && auth.nickname ? auth.nickname : null} :)</h1>
+                <h1><a className='App-header' href={ "/auth/logout" }>Logout</a></h1> */}
+            <MainContainer onReady={onReady} editor={editor} />
+            <StickerSidebar />
         </div>
     )
 }
