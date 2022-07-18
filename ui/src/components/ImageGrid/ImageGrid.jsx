@@ -5,7 +5,7 @@ import Image from "../Image/Image";
 export default function ImageGrid({ photos }) {
     return (
         <div className="image-grid">
-            { photos.map((photo, idx) => <Image photo={ photo } key={`image-${idx}`} />) }
+            { photos.map((photo, idx) => <Image photo={ photo } id={idx} key={`image-${idx}`} />) }
         </div>
     )
 }
