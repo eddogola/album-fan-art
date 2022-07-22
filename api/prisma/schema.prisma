@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ArtWork {
+  id           Int      @id @default(autoincrement())
+  body         String   @db.Text()
+  UserArt      UserArt? @relation(fields: [userArtId], references: [id])
+  userArtId    Int?
+}
+
+model UserArt {
+  id           Int       @id @default(autoincrement())
+  userNickname String    @unique
+  artWorks     ArtWork[]
+}
