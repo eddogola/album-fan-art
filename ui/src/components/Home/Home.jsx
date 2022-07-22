@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { fabric } from "fabric";
 import { useFabricJSEditor } from "fabricjs-react";
+import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
 import TextBar from '../TextBar/TextBar';
 import MainContainer from '../MainContainer/MainContainer';
@@ -25,7 +26,6 @@ export default function Home({ auth }) {
                 img.scaleToHeight(800);
                 editor.canvas.setBackgroundImage(img);
                 editor.canvas.renderAll();
-                editor.canvas.add(img);
             }, 
             {
                 "crossOrigin": "anonymous",
@@ -49,6 +49,7 @@ export default function Home({ auth }) {
     }
 
     function onClickSaveImage() {
+        // downloads the image to local storage
         const ext = "png";
         const base64 = editor.canvas.toDataURL({
             format: ext,
@@ -58,7 +59,14 @@ export default function Home({ auth }) {
         link.href = base64;
         link.download = `album-art.${ext}`;
         link.click();
-        // editor.canvas.toSVG();
+
+        // save base64 string to database
+        axios.post('http://localhost:3001/save-image', {data: base64, auth: auth})
+            .then(response => {
+                console.log("saved to database");
+            }).catch(err => {
+                console.log("error trying to save to database:", err);
+            })
     }
 
     function onAddText() {
@@ -67,13 +75,6 @@ export default function Home({ auth }) {
 
     function onDelete() {
         editor.canvas.remove(editor.canvas.getActiveObject());
-    }
-
-    if (editor) {
-        const activeObject = editor.canvas.getActiveObject();
-        if (activeObject) {
-            console.log(activeObject.get('type'))
-        }
     }
 
     return (
