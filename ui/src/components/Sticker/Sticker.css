@@ -1,0 +1,9 @@
+.sticker-thumbnail {
+    height: 150px;
+    width: 250px;
+    margin: 50px 0;
+}
+
+.sticker-thumbnail:hover {
+    cursor: pointer;
+}
