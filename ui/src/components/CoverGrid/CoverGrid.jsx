@@ -25,6 +25,7 @@ export default function CoverGrid({ auth }) {
         <div className="cover-grid">
             {/* return user covers */}
             {/* hit `covers` endpoint */}
+            <h1>Your covers</h1>
             {
                 covers.map((cover, idx) => <Cover b64Img={ cover.body } key={'cover' + idx} />)
             }
