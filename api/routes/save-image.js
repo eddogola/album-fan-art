@@ -31,9 +31,8 @@ async function writeToDb(b64Img, auth) {
 }
 
 router.post('/', (req, res) => {
-    // const imgData = req.body;
     writeToDb(req.body.data, req.body.auth)
-    // res.send(imgData);
+    res.send();
 })
 
 module.exports = router;
