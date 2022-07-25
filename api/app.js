@@ -45,6 +45,10 @@ app.use('/auth', auth_routes);
 const save_img_routes = require('./routes/save-image');
 app.use('/save-image', save_img_routes);
 
+// mount routes to see user covers
+const covers_routes = require('./routes/covers');
+app.use('/covers', covers_routes);
+
 
 app.get('/', (req, res) => {
 	res.status(200).send({'ping': 'pong'});
