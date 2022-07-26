@@ -1,25 +1,25 @@
 .sidebar {
     background-color: #5369DB;
-    position: fixed;
+    /* position: fixed; */
     height: 100%;
-    width: 500px;
     top: 0;
     left: 0;
     overflow-y: scroll;
+    padding: 0 1em;
 }
 
 .topButton {
     background-color: white;
-    bottom: 40px;
+    /* bottom: 40px;
     position: fixed;
     z-index: 2;
     cursor: pointer;
     border-radius: 7px;
     width: 40px;
-    height: 40px;
+    height: 40px; */
     /* transition: opacity 1s ease-in-out; */
-    box-shadow: 0 9px 25px 0 rgb(132 128 177 / 28%);
-    border: none;
+    /* box-shadow: 0 9px 25px 0 rgb(132 128 177 / 28%); */
+    /* border: none;
     outline: none;
-    left: 370px;
+    left: 370px; */
 }
