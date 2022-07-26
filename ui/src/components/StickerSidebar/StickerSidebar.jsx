@@ -17,7 +17,8 @@ export default function StickerSidebar({ onClickSticker }) {
     ];
 
     return (
-        <div className="sticker-sidebar">
+        <div className="sticker-sidebar col-md-10 mx-auto">
+            <h2 className="text-center">Stickers</h2>
             { stickers.map((sticker, idx) => <Sticker sticker={ sticker } onClick={ onClickSticker } key={ "sticker-" + idx } />) }
         </div>
     )
