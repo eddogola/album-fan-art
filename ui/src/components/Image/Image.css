@@ -1,8 +1,18 @@
-.img-thumbnail {
+.img-fluid {
     height: 200px;
-    width: 200px;
+    width: 100%;
+    border-radius: 5px;
 }
 
-.img-thumbnail:hover {
+.card {
+    border: 0px;
+    border-radius: 5px;
+}
+
+.img-fluid:hover {
     cursor: pointer;
+}
+
+.image {
+    padding-left: 0;
 }
