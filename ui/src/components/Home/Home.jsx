@@ -11,7 +11,6 @@ import './Home.css';
 
 export default function Home({ auth }) {
     const [activePhotoURL, setActivePhotoURL] = useState("");
-    // const [activeBackground, setActiveBackground] = useState(null);
 
     const { editor, onReady } = useFabricJSEditor();
 
@@ -26,10 +25,10 @@ export default function Home({ auth }) {
                 img.scaleToHeight(800);
                 editor.canvas.setBackgroundImage(img);
                 editor.canvas.renderAll();
-            }, 
-            {
-                "crossOrigin": "anonymous",
-            }
+            },
+                {
+                    "crossOrigin": "anonymous",
+                }
             )
         }
     }
@@ -61,7 +60,7 @@ export default function Home({ auth }) {
         link.click();
 
         // save base64 string to database
-        axios.post('http://localhost:3001/save-image', {data: base64, auth: auth})
+        axios.post('http://localhost:3001/save-image', { data: base64, auth: auth })
             .then(response => {
                 console.log("saved to database");
             }).catch(err => {
@@ -79,13 +78,19 @@ export default function Home({ auth }) {
 
     return (
         <div className="home">
-            <Sidebar onClickImage={onClickImage} />
-            {/* <h1>You are logged in as {auth && auth.nickname ? auth.nickname : null} :)</h1>
-                <h1><a className='App-header' href={ "/auth/logout" }>Logout</a></h1> */}
-            <TextBar onAddText={onAddText} onDelete={onDelete} />
-            <MainContainer onReady={onReady} editor={editor} />
-            <Footer onClick={onClickSaveImage} />
-            <StickerSidebar onClickSticker={onClickSticker} />
+            <div className="row">
+                <div className="col-md-3 sidebar-wrapper">
+                    <Sidebar onClickImage={onClickImage} />
+                </div>
+                <div className="col-md-7" style={{'padding': '0'}}>
+                    {/* <TextBar onAddText={onAddText} onDelete={onDelete} /> */}
+                    <MainContainer onReady={onReady} editor={editor} />
+                    {/* <Footer onClick={onClickSaveImage} /> */}
+                </div>
+                <div className="col-md-2"  style={{'padding': '0'}}>
+                    <StickerSidebar onClickSticker={onClickSticker} />
+                </div>
+            </div>
         </div>
     )
 }
