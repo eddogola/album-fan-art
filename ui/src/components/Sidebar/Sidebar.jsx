@@ -3,6 +3,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { createApi } from 'unsplash-js';
 import SearchBar from '../SearchBar/SearchBar';
 import ImageGrid from '../ImageGrid/ImageGrid';
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import './Sidebar.css';
 
 const unsplash = createApi({
@@ -62,7 +63,9 @@ export default function Sidebar({ onClickImage }) {
             </InfiniteScroll>
             <button className="topButton" onClick={() => {
                 formRef.current.scrollIntoView({behaviour: 'smooth'});
-            }}>^</button>
+            }}>
+                <i className="bi bi-arrow-up"></i>
+            </button>
         </div>
     )
 }
