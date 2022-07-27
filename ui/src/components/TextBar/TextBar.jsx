@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { ChromePicker } from 'react-color';
+import { Popover } from 'bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Fonts from './fonts.json';
 import './TextBar.css';
 
-export default function TextBar({ onAddText, onDelete, onLogout, onChangeFontFamily, isText,
-    onChangeFontStyle, onChangeFontWeight, onChangeFontSize }) {
+export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isText,
+    onChangeFontStyle, onChangeFontWeight, onChangeFontSize,
+    activeColor, onColorChange }) {
     const fontStyles = [
         'normal',
         'italic',
@@ -42,10 +45,22 @@ export default function TextBar({ onAddText, onDelete, onLogout, onChangeFontFam
         128,
     ]
 
+    useEffect(() => {
+        const colorBtn = document.querySelector('[data-bs-toggle="popover"]');
+        if (colorBtn) {
+            new Popover(colorBtn);
+        }
+    }, [])
+
     return (
         <div className="text-bar row">
             <div className="col-md-2">
                 <Link className="btn btn-secondary" to="covers">Your covers</Link>
+            </div>
+            <div className="col-md-1">
+                <button className="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled={ !isText }>
+                    color
+                </button>
             </div>
             <div className="col-md-1">
                 <select name="font-size" defaultValue="12" id="" className="form-select"
@@ -93,6 +108,24 @@ export default function TextBar({ onAddText, onDelete, onLogout, onChangeFontFam
                 </a>
             </div>
             
+            <div className="modal" tabIndex="-1" id="exampleModal">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Pick text color</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body mx-auto">
+                        <ChromePicker
+                            color={ activeColor }
+                            onChange={ onColorChange } />
+                    </div>
+                    <div className="modal-footer mx-auto">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
