@@ -11,6 +11,7 @@ import './Home.css';
 export default function Home({ auth }) {
     const { editor, onReady } = useFabricJSEditor();
     const [isText, setIsText] = useState(false);
+    const [activeColor, setActiveColor] = useState("#fff");
 
     // utility function to check if active object is a text one
     const isTextObj = () => {
@@ -90,15 +91,6 @@ export default function Home({ auth }) {
         editor.canvas.remove(editor.canvas.getActiveObject());
     }
 
-    function onLogout() {
-        axios.get('http://localhost:3001/auth/logout')
-            .then(response => {
-                console.log("logged out");
-            }).catch(err => {
-                console.log("error trying to log out:", err);
-            })
-    }
-
     function onChangeFontFamily(e) {
         const textObject = editor.canvas.getActiveObject();
         textObject.set("fontFamily", e.target.value);
@@ -119,8 +111,14 @@ export default function Home({ auth }) {
 
     function onChangeFontSize(e) {
         const textObject = editor.canvas.getActiveObject();
-        // textObject.set("fill", "blue");
         textObject.set("fontSize", e.target.value);
+        editor.canvas.requestRenderAll();
+    }
+
+    function onColorChange(e) {
+        setActiveColor(e.hex);
+        const textObject = editor.canvas.getActiveObject();
+        textObject.set("fill", e.hex);
         editor.canvas.requestRenderAll();
     }
 
@@ -131,9 +129,10 @@ export default function Home({ auth }) {
                     <Sidebar onClickImage={onClickImage} />
                 </div>
                 <div className="col-md-7" style={{ 'padding': '0' }}>
-                    <MainContainer onReady={onReady} onAddText={onAddText} onDelete={onDelete} editor={editor} onLogout={onLogout} 
+                    <MainContainer onReady={onReady} onAddText={onAddText} onDelete={onDelete} editor={editor}
                         onChangeFontFamily={ onChangeFontFamily } isText={ isText } onChangeFontStyle={ onChangeFontStyle}
-                        onChangeFontWeight={ onChangeFontWeight } onChangeFontSize={ onChangeFontSize } />
+                        onChangeFontWeight={ onChangeFontWeight } onChangeFontSize={ onChangeFontSize } 
+                        activeColor={ activeColor} onColorChange={ onColorChange } />
                     <Footer onClick={onClickSaveImage} />
                 </div>
                 <div className="col-md-2" style={{ 'padding': '0' }}>
