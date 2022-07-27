@@ -54,22 +54,22 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
 
     return (
         <div className="text-bar row">
-            <div className="col-md-2">
-                <Link className="btn btn-secondary" to="covers">Your covers</Link>
+            <div className="col-md-1">
+                <Link className="btn btn-secondary" to="covers">Covers</Link>
             </div>
             <div className="col-md-1">
                 <button className="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled={ !isText }>
                     color
                 </button>
             </div>
-            <div className="col-md-1">
+            {/* <div className="col-md-1">
                 <select name="font-size" defaultValue="12" id="" className="form-select"
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Font Size"
                     onChange={ onChangeFontSize }
                     disabled={ !isText }>
                     { fontSizes.map((size, idx) => <option key={ 'fontSize-' + idx } value={ size }>{ size }</option> ) }
                 </select>
-            </div>
+            </div> */}
             <div className="col-md-3">
                 <select name="font-family" defaultValue="Times, Times New Roman, serif" id="" className="form-select"
                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Font Family"
