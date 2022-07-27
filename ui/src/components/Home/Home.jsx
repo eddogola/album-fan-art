@@ -10,6 +10,28 @@ import './Home.css';
 
 export default function Home({ auth }) {
     const { editor, onReady } = useFabricJSEditor();
+    const [isText, setIsText] = useState(false);
+
+    // utility function to check if active object is a text one
+    const isTextObj = () => {
+        const activeObj = editor.canvas.getActiveObject();
+        // found a text object
+        return (activeObj && activeObj.hasOwnProperty('text'))
+    }
+
+    const canvasModifiedCallback = () => {
+        if (isTextObj()) {
+            setIsText(true);
+        } else {
+            setIsText(false);
+        }
+    };
+
+    if (editor) {
+        editor.canvas.on('object:added', canvasModifiedCallback);
+        editor.canvas.on('object:removed', canvasModifiedCallback);
+        editor.canvas.on('object:modified', canvasModifiedCallback);
+    }
 
     function onClickImage(photo) {
         fabric.Image.fromURL(photo.urls.full, img => {
@@ -57,7 +79,11 @@ export default function Home({ auth }) {
     }
 
     function onAddText() {
-        editor.addText("text");
+        const textbox = new fabric.Textbox('text', {
+            fontSize: 50,
+            fontFamily: 'Times new roman',
+        })
+        editor.canvas.add(textbox).setActiveObject(textbox);
     }
 
     function onDelete() {
@@ -73,6 +99,31 @@ export default function Home({ auth }) {
             })
     }
 
+    function onChangeFontFamily(e) {
+        const textObject = editor.canvas.getActiveObject();
+        textObject.set("fontFamily", e.target.value);
+        editor.canvas.requestRenderAll();
+    }
+
+    function onChangeFontStyle(e) {
+        const textObject = editor.canvas.getActiveObject();
+        textObject.set("fontStyle", e.target.value);
+        editor.canvas.requestRenderAll();
+    }
+
+    function onChangeFontWeight(e) {
+        const textObject = editor.canvas.getActiveObject();
+        textObject.set("fontWeight", e.target.value);
+        editor.canvas.requestRenderAll();
+    }
+
+    function onChangeFontSize(e) {
+        const textObject = editor.canvas.getActiveObject();
+        // textObject.set("fill", "blue");
+        textObject.set("fontSize", e.target.value);
+        editor.canvas.requestRenderAll();
+    }
+
     return (
         <div className="home">
             <div className="row">
@@ -80,7 +131,9 @@ export default function Home({ auth }) {
                     <Sidebar onClickImage={onClickImage} />
                 </div>
                 <div className="col-md-7" style={{ 'padding': '0' }}>
-                    <MainContainer onReady={onReady} onAddText={onAddText} onDelete={onDelete} editor={editor} onLogout={onLogout} />
+                    <MainContainer onReady={onReady} onAddText={onAddText} onDelete={onDelete} editor={editor} onLogout={onLogout} 
+                        onChangeFontFamily={ onChangeFontFamily } isText={ isText } onChangeFontStyle={ onChangeFontStyle}
+                        onChangeFontWeight={ onChangeFontWeight } onChangeFontSize={ onChangeFontSize } />
                     <Footer onClick={onClickSaveImage} />
                 </div>
                 <div className="col-md-2" style={{ 'padding': '0' }}>

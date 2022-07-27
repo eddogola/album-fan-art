@@ -12,7 +12,7 @@ export default function Canvas({ onReady, editor }) {
 
     return (
         <div className="inner-canvas-container">
-            <FabricJSCanvas className="canvas mx-auto"  onReady={ onReady }/>
+            <FabricJSCanvas className="canvas mx-auto" onReady={ onReady }/>
         </div>
     )
 }
