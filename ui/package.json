@@ -14,6 +14,7 @@
     "fabricjs-react": "^1.0.8",
     "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-router": "^6.3.0",
