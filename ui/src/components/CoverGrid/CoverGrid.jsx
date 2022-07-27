@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import Cover from '../Cover/Cover';
 
@@ -22,13 +23,25 @@ export default function CoverGrid({ auth }) {
     )
 
     return (
-        <div className="cover-grid">
-            {/* return user covers */}
-            {/* hit `covers` endpoint */}
-            <h1>Your covers</h1>
-            {
-                covers.map((cover, idx) => <Cover b64Img={ cover.body } key={'cover' + idx} />)
-            }
+        <div className="cover-grid container">
+            <h1 className="display-1">Your covers</h1>
+            <p className="lead">
+                Here are some of the cool album covers you've made!
+            </p>
+            <p className="muted">
+                <Link to="/" style={{'textDecoration': 'none'}}>(go back home)</Link>
+            </p>
+            <div className="row">
+                {
+                    covers.map((cover, idx) => ( 
+                        <div className="col-md-4" key={'cover' + idx}>
+                            <Cover b64Img={ cover.body } />
+                        </div>
+                        
+                        )
+                    )
+                }
+            </div>
         </div>
     )
 }
