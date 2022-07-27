@@ -1,5 +1,16 @@
 .footer {
-    background-color: aquamarine;
     height: 50px;
-    margin-left: 500px;
+    text-align: center;
+    padding-top: .5em;
+}
+
+.download {
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+.download:hover {
+    color: #5369DB;
 }
