@@ -1,0 +1,21 @@
+.container-fluid {
+    background-color: #DADEF3;
+    min-height: 100vh;
+    color: rgb(42, 41, 41);
+}
+
+.display-1 {
+    color: blue;
+}
+
+.getStartedBtn {
+    border-radius: 2em;
+    font-size: 2.5em;
+    font-weight: 100;
+}
+
+.getStartedBtn:hover {
+    background-color: #fff;
+    border: 1px solid #0d6efd;
+    color: #0d6efd;
+}
