@@ -40,8 +40,6 @@ export default function Home({ auth }) {
         fabric.Image.fromURL(photo.urls.full, img => {
             img.scaleToWidth(650);
             img.scaleToHeight(800);
-            img.filters.push(new fabric.Image.filters.Sepia())
-            img.applyFilters();
             editor.canvas.setBackgroundImage(img);
             editor.canvas.renderAll();
         },
@@ -126,6 +124,39 @@ export default function Home({ auth }) {
         editor.canvas.requestRenderAll();
     }
 
+    function applyFilter(filter) {
+        let activeFilter;
+
+        switch (filter) {
+            case "sepia":
+                activeFilter = new fabric.Image.filters.Sepia();
+                break;
+            case "grayscale":
+                activeFilter = new fabric.Image.filters.Grayscale();
+                break;
+            case "vintage":
+                activeFilter = new fabric.Image.filters.Vintage();
+                break;
+            case "kodachrome":
+                activeFilter = new fabric.Image.filters.Kodachrome();
+                break;
+            case "technicolor":
+                activeFilter = new fabric.Image.filters.Technicolor();
+                break;
+            case "polaroid":
+                activeFilter = new fabric.Image.filters.Polaroid();
+                break;
+            case "invert":
+                activeFilter = new fabric.Image.filters.Invert();
+                break;
+            default:
+                activeFilter = null
+        }
+        editor.canvas.backgroundImage.filters = [activeFilter]
+        editor.canvas.backgroundImage.applyFilters();
+        editor.canvas.renderAll();
+    }
+
     return (
         <div className="home">
             <div className="row">
@@ -136,7 +167,8 @@ export default function Home({ auth }) {
                     <MainContainer onReady={onReady} onAddText={onAddText} onDelete={onDelete} editor={editor}
                         onChangeFontFamily={ onChangeFontFamily } isText={ isText } onChangeFontStyle={ onChangeFontStyle}
                         onChangeFontWeight={ onChangeFontWeight } onChangeFontSize={ onChangeFontSize } 
-                        activeColor={ activeColor} onColorChange={ onColorChange } />
+                        activeColor={ activeColor} onColorChange={ onColorChange } 
+                        applyFilter={ applyFilter }/>
                     <Footer onClick={onClickSaveImage} />
                 </div>
                 <div className="col-md-2" style={{ 'padding': '0' }}>

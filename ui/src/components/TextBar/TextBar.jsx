@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { fabric } from "fabric";
 import { ChromePicker } from 'react-color';
 import { Popover } from 'bootstrap';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 import Fonts from './fonts.json';
 import './TextBar.css';
 
 export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isText,
-    onChangeFontStyle, onChangeFontWeight, onChangeFontSize,
-    activeColor, onColorChange }) {
+    onChangeFontStyle, onChangeFontWeight,
+    activeColor, onColorChange, applyFilter }) {
     const fontStyles = [
         'normal',
         'italic',
@@ -37,7 +38,22 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
     return (
         <div className="text-bar row">
             <div className="col-md-1">
-                <Link className="btn btn-secondary" to="covers">Covers</Link>
+                <div className="dropdown">
+                    <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        filters
+                    </button>
+                    <ul className="dropdown-menu">
+                        <li><button className="dropdown-item" onClick={ () => applyFilter("sepia") }>Sepia</button></li>
+                        <li><button className="dropdown-item" onClick={ () => applyFilter("grayscale") }>Grayscale</button></li>
+                        <li><button className="dropdown-item" onClick={ () => applyFilter("vintage") }>Vintage</button></li>
+                        <li><button className="dropdown-item" onClick={ () => applyFilter("kodachrome") }>Kodachrome</button></li>
+                        <li><button className="dropdown-item" onClick={ () => applyFilter("technicolor") }>Technicolor</button></li>
+                        <li><button className="dropdown-item" onClick={ () => applyFilter("polaroid") }>Polaroid</button></li>
+                        <li><button className="dropdown-item" onClick={ () => applyFilter("invert") }>Invert</button></li>
+                        <div class="dropdown-divider"></div>
+                        <li><button className="dropdown-item" onClick={ () => applyFilter() }>Clear</button></li>
+                    </ul>
+                </div>
             </div>
             <div className="col-md-1">
                 <button className="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled={ !isText }>
@@ -78,16 +94,7 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
             </div>
             <div className="col-md-3">
                 <button className="Btn btn btn-light" onClick={ onAddText }>Add text</button>
-                {/* Load colors */}
                 <button className="Btn btn btn-danger" onClick={ onDelete }>Delete</button>
-                <a className="btn btn-primary" 
-                    href="http://localhost:3001/auth/logout"
-                    data-bs-toggle="tooltip" 
-                    data-bs-placement="bottom"
-                    data-trigger="hover" 
-                    title="Sign Out">
-                        <i className="bi bi-box-arrow-right"></i>
-                </a>
             </div>
             
             <div className="modal" tabIndex="-1" id="exampleModal">

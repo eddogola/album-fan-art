@@ -3,7 +3,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { createApi } from 'unsplash-js';
 import SearchBar from '../SearchBar/SearchBar';
 import ImageGrid from '../ImageGrid/ImageGrid';
-import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Sidebar.css';
 
 const unsplash = createApi({
