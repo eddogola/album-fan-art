@@ -8,6 +8,8 @@ import StickerSidebar from '../StickerSidebar/StickerSidebar';
 import Footer from '../Footer/Footer';
 import './Home.css';
 
+fabric.textureSize = 4096
+
 export default function Home({ auth }) {
     const { editor, onReady } = useFabricJSEditor();
     const [isText, setIsText] = useState(false);
@@ -35,7 +37,6 @@ export default function Home({ auth }) {
     }
 
     function onClickImage(photo) {
-        fabric.textureSize = 4096
         fabric.Image.fromURL(photo.urls.full, img => {
             img.scaleToWidth(650);
             img.scaleToHeight(800);
