@@ -35,9 +35,12 @@ export default function Home({ auth }) {
     }
 
     function onClickImage(photo) {
+        fabric.textureSize = 4096
         fabric.Image.fromURL(photo.urls.full, img => {
             img.scaleToWidth(650);
             img.scaleToHeight(800);
+            img.filters.push(new fabric.Image.filters.Sepia())
+            img.applyFilters();
             editor.canvas.setBackgroundImage(img);
             editor.canvas.renderAll();
         },

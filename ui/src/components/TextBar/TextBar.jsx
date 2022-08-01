@@ -26,24 +26,6 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
         '900',
     ]
     const fontFamilies = Fonts["font-families"];
-    const fontSizes = [
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        20,
-        24,
-        32,
-        36,
-        40,
-        48,
-        64,
-        96,
-        128,
-    ]
 
     useEffect(() => {
         const colorBtn = document.querySelector('[data-bs-toggle="popover"]');
