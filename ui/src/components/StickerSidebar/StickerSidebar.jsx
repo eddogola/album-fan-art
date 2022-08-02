@@ -17,8 +17,6 @@ export default function StickerSidebar({ onClickSticker }) {
         },
     ];
 
-    const logoutLink = `${process.env.REACT_APP_HOST}/auth/logout`
-
     return (
         <div className="sticker-sidebar col-md-10 mx-auto">
             <div className="row">
@@ -27,7 +25,7 @@ export default function StickerSidebar({ onClickSticker }) {
                 </div>
                 <div className="col-md-6">
                 <a className="btn btn-primary" 
-                    href={ logoutLink }
+                    href="/auth/logout"
                     data-bs-toggle="tooltip" 
                     data-bs-placement="bottom"
                     data-trigger="hover" 

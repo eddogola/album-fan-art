@@ -7,7 +7,7 @@ export default function CoverGrid({ auth }) {
     const [covers, setCovers] = useState([]);
 
     const getCovers = (nickname) => {
-        axios.get(`${process.env.REACT_APP_HOST}/covers`, {
+        axios.get(`/covers`, {
             params: {
                 nickname: nickname,
             },
