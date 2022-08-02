@@ -16,11 +16,13 @@ const passport = require('./passport');
 
 const app = express();
 
+app.use(express.static(path.resolve(__dirname, "./build")))
+
 app.use(passport.initialize());
 
-// app.use(cors());
+app.use(cors());
 app.use(morgan('tiny'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '200mb'}));
 
 // set security configs
 app.use(helmet());
@@ -34,12 +36,20 @@ app.use(
 		expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
 	})
 );
-app.use(csurf());
+// app.use(csurf());
 
 
 // mount api auth routes to app
 const auth_routes = require('./routes/auth');
 app.use('/auth', auth_routes);
+
+// mount routes to save image
+const save_img_routes = require('./routes/save-image');
+app.use('/save-image', save_img_routes);
+
+// mount routes to see user covers
+const covers_routes = require('./routes/covers');
+app.use('/covers', covers_routes);
 
 
 app.get('/', (req, res) => {

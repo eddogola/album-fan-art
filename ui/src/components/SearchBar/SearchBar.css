@@ -1,0 +1,14 @@
+.search-bar {
+    padding: 0.8em .5em;
+}
+
+#search-bar {
+    width: 100%;
+    font-weight: bold;
+    border-radius: 55px;
+}
+
+.ms-n5 {
+    margin-left: -40px;
+    border-radius: 55px;
+}
