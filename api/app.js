@@ -16,6 +16,8 @@ const passport = require('./passport');
 
 const app = express();
 
+app.use(express.static(path.resolve(__dirname, "../ui/build")))
+
 app.use(passport.initialize());
 
 app.use(cors());
