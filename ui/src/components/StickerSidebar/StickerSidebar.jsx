@@ -28,7 +28,7 @@ export default function StickerSidebar({ onClickSticker }) {
                     href="/auth/logout"
                     data-bs-toggle="tooltip" 
                     data-bs-placement="bottom"
-                    data-trigger="hover" 
+                    data-trigger="hover"  
                     title="Sign Out">
                         <i className="bi bi-box-arrow-right"></i>
                 </a>
