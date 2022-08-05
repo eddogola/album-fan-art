@@ -10,6 +10,10 @@ router.get('/', async (req, res) => {
         // get user nickname from request params
         const nickname = req.query.nickname;
 
+        console.log("##################################")
+        console.log(nickname)
+        console.log("##################################")
+
         // get UserArt(user) using nickname
         const user = await prisma.userArt.findUnique({
             where: {
