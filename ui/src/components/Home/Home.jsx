@@ -73,7 +73,7 @@ export default function Home({ auth }) {
         link.click();
 
         // save base64 string to database
-        axios.post(`${process.env.REACT_APP_HOST}/save-image`, { data: base64, auth: auth })
+        axios.post(`/save-image`, { data: base64, auth: auth })
             .then(response => {
                 console.log("saved to database");
             }).catch(err => {

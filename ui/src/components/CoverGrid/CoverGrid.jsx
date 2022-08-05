@@ -25,9 +25,7 @@ export default function CoverGrid({ auth }) {
     return (
         <div className="cover-grid container">
             <h1 className="display-1">Your covers</h1>
-            <p className="lead">
-                Here are some of the cool album covers you've made!
-            </p>
+            <p className="lead">Here are some of the cool album covers you've made!</p>
             <p className="muted">
                 <Link to="/" style={{'textDecoration': 'none'}}>(go back home)</Link>
             </p>
