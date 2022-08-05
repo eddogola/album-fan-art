@@ -44,7 +44,7 @@ router.get('/current-session', (req, res) => {
             res.send(user);
         }
     })(req, res);
-});
+})
 
 router.get('/logout', (req, res) => {
     req.session = null;
