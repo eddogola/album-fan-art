@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { fabric } from "fabric";
 import { useFabricJSEditor } from "fabricjs-react";
+import * as mi from '@magenta/image';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
 import MainContainer from '../MainContainer/MainContainer';
@@ -53,11 +54,25 @@ export default function Home({ auth }) {
         fabric.Image.fromURL(sticker.src, img => {
             img.scaleToHeight(90);
             img.scaleToWidth(160);
+            editor.canvas.setActiveObject(img);
             editor.canvas.add(img);
         },
             {
                 "crossOrigin": "anonymous",
             });
+    }
+
+    function onClickPainting(painting) {
+        if (editor.canvas.backgroundImage) {
+            fabric.Image.fromURL(painting.src, img => {
+                img.scaleToHeight(90);
+                img.scaleToWidth(160);
+                model.initialize().then(() => { stylize(painting.src) })
+            },
+            {
+                "crossOrigin": "anonymous",
+            })
+        }
     }
 
     function onClickSaveImage() {
@@ -157,6 +172,38 @@ export default function Home({ auth }) {
         editor.canvas.renderAll();
     }
 
+    const model = new mi.ArbitraryStyleTransferNetwork();
+
+    function stylize(paintingSrc) {
+        const contentImg = new Image();
+        contentImg.width = 650;
+        contentImg.height = 800;
+        contentImg.crossOrigin = "anonymous"
+        contentImg.src = editor.canvas.backgroundImage.getSrc();
+        const styleImg = new Image();
+        styleImg.width = 256;
+        styleImg.height = 256;
+        styleImg.crossOrigin = "anonymous"
+        styleImg.src = paintingSrc;
+
+        if (contentImg.src !== "" && styleImg.src !== "") {
+            setTimeout(()=> {model.stylize(contentImg, styleImg).then((imgData) => {
+                let c = document.createElement('canvas');
+                c.setAttribute('id', 'stylized');
+                c.width = 650
+                c.height = 800
+                c.getContext('2d').putImageData(imgData, 0, 0);
+                console.log(imgData)
+                fabric.Image.fromURL(c.toDataURL(), (img) => {
+                    editor.canvas.setBackgroundImage(img);
+                    c = null;
+                    editor.canvas.renderAll();
+                })
+            })}, 50)
+            
+        }
+    }
+
     return (
         <div className="home">
             <div className="row">
@@ -172,7 +219,7 @@ export default function Home({ auth }) {
                     <Footer onClick={onClickSaveImage} />
                 </div>
                 <div className="col-md-2" style={{ 'padding': '0' }}>
-                    <StickerSidebar onClickSticker={onClickSticker} />
+                    <StickerSidebar onClickSticker={onClickSticker} onClickPainting={ onClickPainting } />
                 </div>
             </div>
         </div>
