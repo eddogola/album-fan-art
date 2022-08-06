@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { fabric } from "fabric";
 import { ChromePicker } from 'react-color';
 import { Popover } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -50,7 +49,7 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
                         <li><button className="dropdown-item" onClick={ () => applyFilter("technicolor") }>Technicolor</button></li>
                         <li><button className="dropdown-item" onClick={ () => applyFilter("polaroid") }>Polaroid</button></li>
                         <li><button className="dropdown-item" onClick={ () => applyFilter("invert") }>Invert</button></li>
-                        <div class="dropdown-divider"></div>
+                        <div className="dropdown-divider"></div>
                         <li><button className="dropdown-item" onClick={ () => applyFilter() }>Clear</button></li>
                     </ul>
                 </div>
