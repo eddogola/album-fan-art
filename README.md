@@ -24,3 +24,6 @@ I deployed the app on Heroku. The live version can be found here: https://album-
 Running the app locally might be a bit problematic as you will want to get custom authentication credentials to work with Unsplash, Auth0, and for local cookie secretes.
 
 ## `Demo`
+
+https://user-images.githubusercontent.com/64967909/183775399-ea256d3a-9eb1-454f-9909-459cd6397142.mp4
+
