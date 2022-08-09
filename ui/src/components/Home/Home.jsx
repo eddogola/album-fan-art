@@ -126,12 +126,6 @@ export default function Home({ auth }) {
         editor.canvas.requestRenderAll();
     }
 
-    function onChangeFontSize(e) {
-        const textObject = editor.canvas.getActiveObject();
-        textObject.set("fontSize", e.target.value);
-        editor.canvas.requestRenderAll();
-    }
-
     function onColorChange(e) {
         setActiveColor(e.hex);
         const textObject = editor.canvas.getActiveObject();
@@ -215,7 +209,7 @@ export default function Home({ auth }) {
                 <div className="col-md-7" style={{ "padding": "0" }}>
                     <MainContainer onReady={onReady} onAddText={onAddText} onDelete={onDelete} editor={editor}
                         onChangeFontFamily={ onChangeFontFamily } isText={ isText } onChangeFontStyle={ onChangeFontStyle}
-                        onChangeFontWeight={ onChangeFontWeight } onChangeFontSize={ onChangeFontSize } 
+                        onChangeFontWeight={ onChangeFontWeight }
                         activeColor={ activeColor} onColorChange={ onColorChange } 
                         applyFilter={ applyFilter }/>
                     <Footer onClick={onClickSaveImage} />

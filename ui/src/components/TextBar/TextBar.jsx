@@ -63,14 +63,6 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
                     color
                 </button>
             </div>
-            {/* <div className="col-md-1">
-                <select name="font-size" defaultValue="12" id="" className="form-select"
-                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Font Size"
-                    onChange={ onChangeFontSize }
-                    disabled={ !isText }>
-                    { fontSizes.map((size, idx) => <option key={ 'fontSize-' + idx } value={ size }>{ size }</option> ) }
-                </select>
-            </div> */}
             <div className="col-md-3">
                 <select name="font-family" defaultValue="Times, Times New Roman, serif" id="" className="form-select"
                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Font Family"
