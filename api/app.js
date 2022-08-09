@@ -5,7 +5,6 @@ const cors = require("cors");
 const session = require("cookie-session");
 const helmet = require("helmet");
 const hpp = require("hpp");
-const csurf = require("csurf");
 const path = require("path");
 const dotenv = require("dotenv");
 
@@ -36,7 +35,6 @@ app.use(
 		expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
 	})
 );
-// app.use(csurf());
 
 
 // mount api auth routes to app
