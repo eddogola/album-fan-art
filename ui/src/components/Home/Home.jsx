@@ -108,64 +108,11 @@ export default function Home({ auth }) {
         editor.canvas.remove(editor.canvas.getActiveObject());
     }
 
-    function onChangeFontFamily(e) {
-        const textObject = editor.canvas.getActiveObject();
-        textObject.set("fontFamily", e.target.value);
-        editor.canvas.requestRenderAll();
-    }
-
-    function onChangeFontStyle(e) {
-        const textObject = editor.canvas.getActiveObject();
-        textObject.set("fontStyle", e.target.value);
-        editor.canvas.requestRenderAll();
-    }
-
-    function onChangeFontWeight(e) {
-        const textObject = editor.canvas.getActiveObject();
-        textObject.set("fontWeight", e.target.value);
-        editor.canvas.requestRenderAll();
-    }
-
     function onColorChange(e) {
         setActiveColor(e.hex);
         const textObject = editor.canvas.getActiveObject();
         textObject.set("fill", e.hex);
         editor.canvas.requestRenderAll();
-    }
-
-    function applyFilter(filter) {
-        let activeFilter;
-
-        switch (filter) {
-            case "sepia":
-                activeFilter = new fabric.Image.filters.Sepia();
-                break;
-            case "grayscale":
-                activeFilter = new fabric.Image.filters.Grayscale();
-                break;
-            case "vintage":
-                activeFilter = new fabric.Image.filters.Vintage();
-                break;
-            case "kodachrome":
-                activeFilter = new fabric.Image.filters.Kodachrome();
-                break;
-            case "technicolor":
-                activeFilter = new fabric.Image.filters.Technicolor();
-                break;
-            case "polaroid":
-                activeFilter = new fabric.Image.filters.Polaroid();
-                break;
-            case "invert":
-                activeFilter = new fabric.Image.filters.Invert();
-                break;
-            default:
-                activeFilter = null;
-        }
-        if (editor.canvas.backgroundImage) {
-            editor.canvas.backgroundImage.filters = [activeFilter];
-            editor.canvas.backgroundImage.applyFilters();
-            editor.canvas.renderAll();
-        }
     }
 
     const model = new mi.ArbitraryStyleTransferNetwork();
@@ -208,10 +155,7 @@ export default function Home({ auth }) {
                 </div>
                 <div className="col-md-7" style={{ "padding": "0" }}>
                     <MainContainer onReady={onReady} onAddText={onAddText} onDelete={onDelete} editor={editor}
-                        onChangeFontFamily={ onChangeFontFamily } isText={ isText } onChangeFontStyle={ onChangeFontStyle}
-                        onChangeFontWeight={ onChangeFontWeight }
-                        activeColor={ activeColor} onColorChange={ onColorChange } 
-                        applyFilter={ applyFilter }/>
+                        isText={ isText } activeColor={ activeColor} onColorChange={ onColorChange } />
                     <Footer onClick={onClickSaveImage} />
                 </div>
                 <div className="col-md-2" style={{ "padding": "0" }}>

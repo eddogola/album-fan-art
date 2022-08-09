@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { fabric } from "fabric";
 import { ChromePicker } from "react-color";
 import { Popover } from "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
@@ -6,9 +7,7 @@ import "bootstrap/dist/js/bootstrap.js";
 import Fonts from "./fonts.json";
 import "./TextBar.css";
 
-export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isText,
-    onChangeFontStyle, onChangeFontWeight,
-    activeColor, onColorChange, applyFilter }) {
+export default function TextBar({ onAddText, onDelete, isText, activeColor, onColorChange, editor }) {
     const fontStyles = [
         "normal",
         "italic",
@@ -33,6 +32,66 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
             new Popover(colorBtn);
         }
     }, []);
+
+    function applyFilter(filter) {
+        let activeFilter;
+
+        switch (filter) {
+            case "sepia":
+                activeFilter = new fabric.Image.filters.Sepia();
+                break;
+            case "grayscale":
+                activeFilter = new fabric.Image.filters.Grayscale();
+                break;
+            case "vintage":
+                activeFilter = new fabric.Image.filters.Vintage();
+                break;
+            case "kodachrome":
+                activeFilter = new fabric.Image.filters.Kodachrome();
+                break;
+            case "technicolor":
+                activeFilter = new fabric.Image.filters.Technicolor();
+                break;
+            case "polaroid":
+                activeFilter = new fabric.Image.filters.Polaroid();
+                break;
+            case "invert":
+                activeFilter = new fabric.Image.filters.Invert();
+                break;
+            default:
+                activeFilter = null;
+        }
+        if (editor.canvas.backgroundImage) {
+            editor.canvas.backgroundImage.filters = [activeFilter];
+            editor.canvas.backgroundImage.applyFilters();
+            editor.canvas.renderAll();
+        }
+    }
+
+    function onChangeFontFamily(e) {
+        const textObject = editor.canvas.getActiveObject();
+        textObject.set("fontFamily", e.target.value);
+        editor.canvas.requestRenderAll();
+    }
+
+    function onChangeFontStyle(e) {
+        const textObject = editor.canvas.getActiveObject();
+        textObject.set("fontStyle", e.target.value);
+        editor.canvas.requestRenderAll();
+    }
+
+    function onChangeFontWeight(e) {
+        const textObject = editor.canvas.getActiveObject();
+        textObject.set("fontWeight", e.target.value);
+        editor.canvas.requestRenderAll();
+    }
+
+    // function onColorChange(e) {
+    //     setActiveColor(e.hex);
+    //     const textObject = editor.canvas.getActiveObject();
+    //     textObject.set("fill", e.hex);
+    //     editor.canvas.requestRenderAll();
+    // }
 
     const filters = ["sepia", "grayscale", "vintage", "kodachrome", "technicolor", "polaroid", "invert"];
 
