@@ -68,16 +68,16 @@ export default function StickerSidebar({ onClickSticker, onClickPainting }) {
                 </div>
             </div>
             <nav className="pt-2">
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="stickers-tab" data-bs-toggle="tab" data-bs-target="#stickers" type="button" role="tab" aria-controls="nav-stickers" aria-selected="true">Stickers</button>
-                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#paintings" type="button" role="tab" aria-controls="nav-paintings" aria-selected="false">Paintings</button>
+            <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                <button className="nav-link active" id="stickers-tab" data-bs-toggle="tab" data-bs-target="#stickers" type="button" role="tab" aria-controls="nav-stickers" aria-selected="true">Stickers</button>
+                <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#paintings" type="button" role="tab" aria-controls="nav-paintings" aria-selected="false">Paintings</button>
             </div>
             </nav>
-            <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="stickers" role="tabpanel" aria-labelledby="stickers" tabindex="0">
+            <div className="tab-content" id="nav-tabContent">
+            <div className="tab-pane fade show active" id="stickers" role="tabpanel" aria-labelledby="stickers" tabIndex="0">
                 { stickers.map((sticker, idx) => <Sticker sticker={ sticker } onClick={ onClickSticker } key={ "sticker-" + idx } />) }
             </div>
-            <div class="tab-pane fade" id="paintings" role="tabpanel" aria-labelledby="stickers" tabindex="0">
+            <div className="tab-pane fade" id="paintings" role="tabpanel" aria-labelledby="stickers" tabIndex="0">
                 <div className="text-dark">Apply neural style transfer to your images</div>
                 { paintings.map((painting, idx) => <Painting painting={ painting } onClick={ onClickPainting } key={ "painting-" + idx } />) }
             </div>
