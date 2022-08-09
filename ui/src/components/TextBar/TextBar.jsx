@@ -34,6 +34,8 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
         }
     }, []);
 
+    const filters = ["sepia", "grayscale", "vintage", "kodachrome", "technicolor", "polaroid", "invert"];
+
     return (
         <div className="text-bar row">
             <div className="col-md-1">
@@ -42,13 +44,15 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
                         filters
                     </button>
                     <ul className="dropdown-menu">
-                        <li><button className="dropdown-item" onClick={ () => applyFilter("sepia") }>Sepia</button></li>
-                        <li><button className="dropdown-item" onClick={ () => applyFilter("grayscale") }>Grayscale</button></li>
-                        <li><button className="dropdown-item" onClick={ () => applyFilter("vintage") }>Vintage</button></li>
-                        <li><button className="dropdown-item" onClick={ () => applyFilter("kodachrome") }>Kodachrome</button></li>
-                        <li><button className="dropdown-item" onClick={ () => applyFilter("technicolor") }>Technicolor</button></li>
-                        <li><button className="dropdown-item" onClick={ () => applyFilter("polaroid") }>Polaroid</button></li>
-                        <li><button className="dropdown-item" onClick={ () => applyFilter("invert") }>Invert</button></li>
+                        {
+                            filters.map((filter, idx) => (
+                                <li key={'filter-'+ idx}>
+                                    <button className="dropdown-item" onClick={ () => applyFilter(filter) }>
+                                        { filter[0].toUpperCase() + filter.substring(1) }
+                                    </button>
+                                </li>
+                            ))
+                        }
                         <div className="dropdown-divider"></div>
                         <li><button className="dropdown-item" onClick={ () => applyFilter() }>Clear</button></li>
                     </ul>
