@@ -167,9 +167,11 @@ export default function Home({ auth }) {
             default:
                 activeFilter = null;
         }
-        editor.canvas.backgroundImage.filters = [activeFilter];
-        editor.canvas.backgroundImage.applyFilters();
-        editor.canvas.renderAll();
+        if (editor.canvas.backgroundImage) {
+            editor.canvas.backgroundImage.filters = [activeFilter];
+            editor.canvas.backgroundImage.applyFilters();
+            editor.canvas.renderAll();
+        }
     }
 
     const model = new mi.ArbitraryStyleTransferNetwork();
