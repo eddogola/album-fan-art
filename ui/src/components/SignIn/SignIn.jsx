@@ -1,5 +1,5 @@
 import React from "react";
-import './SignIn.css';
+import "./SignIn.css";
 import pic from "./undraw_happy_music_g6wc.svg";
 
 export default function SignIn(props) {
@@ -19,5 +19,5 @@ export default function SignIn(props) {
             <div className="sign-in">
         </div>
         </div>
-    )
+    );
 }

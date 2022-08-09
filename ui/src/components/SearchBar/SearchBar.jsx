@@ -1,6 +1,6 @@
 import React from "react";
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import './SearchBar.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "./SearchBar.css";
 
 export default function SearchBar({ setQuery, setPhotos, setIsLoading, formRef }) {
 
@@ -27,5 +27,5 @@ export default function SearchBar({ setQuery, setPhotos, setIsLoading, formRef }
                 </div>
             </form>
         </div>
-    )
+    );
 }

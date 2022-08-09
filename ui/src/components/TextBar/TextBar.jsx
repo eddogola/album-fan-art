@@ -1,38 +1,38 @@
 import React, { useEffect } from "react";
-import { ChromePicker } from 'react-color';
-import { Popover } from 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
-import Fonts from './fonts.json';
-import './TextBar.css';
+import { ChromePicker } from "react-color";
+import { Popover } from "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import Fonts from "./fonts.json";
+import "./TextBar.css";
 
 export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isText,
     onChangeFontStyle, onChangeFontWeight,
     activeColor, onColorChange, applyFilter }) {
     const fontStyles = [
-        'normal',
-        'italic',
-        'oblique',
-    ]
+        "normal",
+        "italic",
+        "oblique",
+    ];
     const fontWeights = [
-        '100',
-        '200',
-        '300',
-        'normal',
-        '500',
-        '600',
-        'bold',
-        '800',
-        '900',
-    ]
+        "100",
+        "200",
+        "300",
+        "normal",
+        "500",
+        "600",
+        "bold",
+        "800",
+        "900",
+    ];
     const fontFamilies = Fonts["font-families"];
 
     useEffect(() => {
-        const colorBtn = document.querySelector('[data-bs-toggle="popover"]');
+        const colorBtn = document.querySelector("[data-bs-toggle=\"popover\"]");
         if (colorBtn) {
             new Popover(colorBtn);
         }
-    }, [])
+    }, []);
 
     return (
         <div className="text-bar row">
@@ -72,7 +72,7 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Font Family"
                 onChange={ onChangeFontFamily }
                 disabled={ !isText }>
-                    { fontFamilies.map((family, idx) => <option key={ 'fontFamily-' + idx } value={ family }>{ family }</option> ) }
+                    { fontFamilies.map((family, idx) => <option key={ "fontFamily-" + idx } value={ family }>{ family }</option> ) }
                 </select>
             </div>
             <div className="col-md-2">
@@ -80,7 +80,7 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Font Style"
                     onChange={ onChangeFontStyle }
                     disabled={ !isText }>
-                    { fontStyles.map((style, idx) => <option key={ 'fontStyle-' + idx } value={ style }>{ style }</option> ) }
+                    { fontStyles.map((style, idx) => <option key={ "fontStyle-" + idx } value={ style }>{ style }</option> ) }
                 </select>
             </div>
             <div className="col-md-2">
@@ -88,7 +88,7 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Font Weight"
                     onChange={ onChangeFontWeight }
                     disabled={ !isText }>
-                    { fontWeights.map((weight, idx) => <option key={ 'fontWeight-' + idx } value={ weight }>{ weight }</option> ) }
+                    { fontWeights.map((weight, idx) => <option key={ "fontWeight-" + idx } value={ weight }>{ weight }</option> ) }
                 </select>
             </div>
             <div className="col-md-3">
@@ -115,5 +115,5 @@ export default function TextBar({ onAddText, onDelete, onChangeFontFamily, isTex
                 </div>
             </div>
         </div>
-    )
+    );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import WorkingArea from "../WorkingArea/WorkingArea";
 import TextBar from "../TextBar/TextBar";
-import './MainContainer.css';
+import "./MainContainer.css";
 
 export default function MainContainer({ onReady, editor, onAddText, onDelete, onChangeFontFamily, isText,
     onChangeFontStyle, onChangeFontWeight, onChangeFontSize, activeColor, onColorChange, applyFilter }) {
@@ -13,5 +13,5 @@ export default function MainContainer({ onReady, editor, onAddText, onDelete, on
                 applyFilter={ applyFilter } />
             <WorkingArea onReady={ onReady } editor={ editor } />
         </div>
-    )
+    );
 }

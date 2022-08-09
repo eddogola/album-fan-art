@@ -1,6 +1,6 @@
 import React from "react";
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import './Footer.css'
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "./Footer.css";
 
 export default function Footer({ onClick }) {
     return (
@@ -11,5 +11,5 @@ export default function Footer({ onClick }) {
                 </button>
             </span>
         </div>
-    )
+    );
 }

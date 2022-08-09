@@ -1,52 +1,52 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import barcode from './barcode.png';
-import parentalAdvisory from './parental-advisory.png';
-import monaLisa from './mona_lisa.jpg';
-import starryNight from './starry_night.jpeg';
-import kanagawa from './kanagawa.jpg';
-import screamingMan from './screaming-man.jpeg';
-import acrylicPainting from './acrylic-painting.jpg';
-import fragonard from './fragonard.jpg';
+import { Link } from "react-router-dom";
+import barcode from "./barcode.png";
+import parentalAdvisory from "./parental-advisory.png";
+import monaLisa from "./mona_lisa.jpg";
+import starryNight from "./starry_night.jpeg";
+import kanagawa from "./kanagawa.jpg";
+import screamingMan from "./screaming-man.jpeg";
+import acrylicPainting from "./acrylic-painting.jpg";
+import fragonard from "./fragonard.jpg";
 import Sticker from "../Sticker/Sticker";
 import Painting from "../Painting/Painting";
-import './StickerSidebar.css';
+import "./StickerSidebar.css";
 
 export default function StickerSidebar({ onClickSticker, onClickPainting }) {
     const stickers = [
         {
-            'src': barcode,
-            'alt': 'barcode',
+            "src": barcode,
+            "alt": "barcode",
         },
         {
-            'src': parentalAdvisory,
-            'alt': 'parental-advisory',
+            "src": parentalAdvisory,
+            "alt": "parental-advisory",
         }
     ];
 
     const paintings = [
         {
-            'src': monaLisa,
-            'alt': 'mona lisa',
+            "src": monaLisa,
+            "alt": "mona lisa",
         },
         {
-            'src': starryNight,
-            'alt': 'starry night - van Gogh'
+            "src": starryNight,
+            "alt": "starry night - van Gogh"
         },
         {
-            'src': kanagawa,
-            'alt': 'the great wave of kanagawa',
+            "src": kanagawa,
+            "alt": "the great wave of kanagawa",
         },
         {
-            'src': screamingMan,
-            'alt': 'screaming man by edvard munch'
+            "src": screamingMan,
+            "alt": "screaming man by edvard munch"
         },
         {
-            'src': acrylicPainting,
-            'alt': acrylicPainting,
+            "src": acrylicPainting,
+            "alt": acrylicPainting,
         }, {
-            'src': fragonard,
-            'alt': 'Fragonard painting'
+            "src": fragonard,
+            "alt": "Fragonard painting"
         }
     ];
 
@@ -83,5 +83,5 @@ export default function StickerSidebar({ onClickSticker, onClickPainting }) {
             </div>
             </div>
         </div>
-    )
+    );
 }

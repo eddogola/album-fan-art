@@ -1,5 +1,5 @@
 import React from "react";
-import './Image.css';
+import "./Image.css";
 
 export default function Image({ photo, id, onClick }) {
     return (
@@ -11,5 +11,5 @@ export default function Image({ photo, id, onClick }) {
                 } } />
             </div>
         </div>
-    )
+    );
 }

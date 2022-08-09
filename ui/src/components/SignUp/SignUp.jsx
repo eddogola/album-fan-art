@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 export default function SignUp({}) {
     return (
         <div className="sign-up">
             <SignUpForm />
         </div>
-    )
+    );
 }
 
 export function SignUpForm({}) {
@@ -19,5 +19,5 @@ export function SignUpForm({}) {
                 <button type="submit">Sign Up</button>
             </form>
         </div>
-    )
+    );
 }
