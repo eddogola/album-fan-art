@@ -15,9 +15,9 @@ The application is built on top of Node/Express JS and React.
  - For the database layer, I used [PostgreSQL](https://www.postgresql.org/) with [Prisma](https://www.prisma.io/) as the ORM.
  - For the [Neural Style Transfer(NST)](https://en.wikipedia.org/wiki/Neural_style_transfer), I used Google Brain's NST model, made available through [magenta.js](https://magenta.tensorflow.org/js-announce), and riding on [tensorflow.js](https://www.tensorflow.org/js).
 
-## `Deployment`
+<!-- ## `Deployment`
 
-I deployed the app on Heroku. The live version can be found here: https://album-fan-art.herokuapp.com/.
+I deployed the app on Heroku. The live version can be found here: https://album-fan-art.herokuapp.com/. -->
 
 ### `running locally`
 
