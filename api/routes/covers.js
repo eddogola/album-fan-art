@@ -16,11 +16,6 @@ router.get("/", async (req, res) => {
 				userNickname: nickname,
 			},
 		});
-
-		// if (!user) {
-            
-		// }
-
 		// then get UserArtId(user id) from user
 		// get ArtWork(covers) using UserArtId
 		const covers = await prisma.artWork.findMany({
