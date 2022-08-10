@@ -1,5 +1,5 @@
 import React from "react";
-import './Sticker.css';
+import "./Sticker.css";
 
 export default function Sticker({ sticker, onClick }) {
     return (
@@ -7,5 +7,5 @@ export default function Sticker({ sticker, onClick }) {
             <img className="sticker-thumbnail" src={ sticker.src } alt={ sticker.alt }
             onClick={ () => onClick(sticker) } />
         </div>
-    )
+    );
 }

@@ -6,5 +6,5 @@ export default function WorkingArea({ onReady, editor }) {
         <div className="working-area">
             <Canvas onReady={ onReady } editor={ editor } />
         </div>
-    )
+    );
 }

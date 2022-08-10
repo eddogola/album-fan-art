@@ -1,17 +1,14 @@
 import React from "react";
 import WorkingArea from "../WorkingArea/WorkingArea";
 import TextBar from "../TextBar/TextBar";
-import './MainContainer.css';
+import "./MainContainer.css";
 
-export default function MainContainer({ onReady, editor, onAddText, onDelete, onChangeFontFamily, isText,
-    onChangeFontStyle, onChangeFontWeight, onChangeFontSize, activeColor, onColorChange, applyFilter }) {
+export default function MainContainer({ onReady, editor, onAddText, onDelete, isText, activeColor, onColorChange, applyFilter }) {
     return (
         <div className="main-container">
-            <TextBar onAddText={onAddText} onDelete={onDelete} onChangeFontFamily={ onChangeFontFamily } 
-                isText={ isText } onChangeFontStyle={ onChangeFontStyle } onChangeFontWeight={ onChangeFontWeight }
-                onChangeFontSize={ onChangeFontSize } activeColor={ activeColor } onColorChange={ onColorChange }
-                applyFilter={ applyFilter } />
+            <TextBar onAddText={onAddText} onDelete={onDelete} isText={ isText } 
+                activeColor={ activeColor } onColorChange={ onColorChange } editor={ editor } />
             <WorkingArea onReady={ onReady } editor={ editor } />
         </div>
-    )
+    );
 }
