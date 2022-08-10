@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { fabric } from "fabric";
 import { useFabricJSEditor } from "fabricjs-react";
-import axios from 'axios';
-import Sidebar from '../Sidebar/Sidebar';
-import MainContainer from '../MainContainer/MainContainer';
-import StickerSidebar from '../StickerSidebar/StickerSidebar';
-import Footer from '../Footer/Footer';
-import './Home.css';
+import * as mi from "@magenta/image";
+import axios from "axios";
+import Sidebar from "../Sidebar/Sidebar";
+import MainContainer from "../MainContainer/MainContainer";
+import StickerSidebar from "../StickerSidebar/StickerSidebar";
+import Footer from "../Footer/Footer";
+import "./Home.css";
 
-fabric.textureSize = 4096
+fabric.textureSize = 4096;
 
 export default function Home({ auth }) {
     const { editor, onReady } = useFabricJSEditor();
@@ -19,8 +20,8 @@ export default function Home({ auth }) {
     const isTextObj = () => {
         const activeObj = editor.canvas.getActiveObject();
         // found a text object
-        return (activeObj && activeObj.hasOwnProperty('text'))
-    }
+        return (activeObj && activeObj.hasOwnProperty("text"));
+    };
 
     const canvasModifiedCallback = () => {
         if (isTextObj()) {
@@ -31,9 +32,9 @@ export default function Home({ auth }) {
     };
 
     if (editor) {
-        editor.canvas.on('object:added', canvasModifiedCallback);
-        editor.canvas.on('object:removed', canvasModifiedCallback);
-        editor.canvas.on('object:modified', canvasModifiedCallback);
+        editor.canvas.on("object:added", canvasModifiedCallback);
+        editor.canvas.on("object:removed", canvasModifiedCallback);
+        editor.canvas.on("object:modified", canvasModifiedCallback);
     }
 
     function onClickImage(photo) {
@@ -46,18 +47,32 @@ export default function Home({ auth }) {
             {
                 "crossOrigin": "anonymous",
             }
-        )
+        );
     }
 
     function onClickSticker(sticker) {
         fabric.Image.fromURL(sticker.src, img => {
             img.scaleToHeight(90);
             img.scaleToWidth(160);
+            editor.canvas.setActiveObject(img);
             editor.canvas.add(img);
         },
             {
                 "crossOrigin": "anonymous",
             });
+    }
+
+    function onClickPainting(painting) {
+        if (editor.canvas.backgroundImage) {
+            fabric.Image.fromURL(painting.src, img => {
+                img.scaleToHeight(90);
+                img.scaleToWidth(160);
+                model.initialize().then(() => { stylize(painting.src); });
+            },
+            {
+                "crossOrigin": "anonymous",
+            });
+        }
     }
 
     function onClickSaveImage() {
@@ -73,48 +88,24 @@ export default function Home({ auth }) {
         link.click();
 
         // save base64 string to database
-        axios.post(`/save-image`, { data: base64, auth: auth })
+        axios.post("http://localhost:3001/save-image", { data: base64, auth: auth })
             .then(response => {
                 console.log("saved to database");
             }).catch(err => {
                 console.log("error trying to save to database:", err);
-            })
+            });
     }
 
     function onAddText() {
-        const textbox = new fabric.Textbox('text', {
+        const textbox = new fabric.Textbox("text", {
             fontSize: 50,
-            fontFamily: 'Times new roman',
-        })
+            fontFamily: "Times new roman",
+        });
         editor.canvas.add(textbox).setActiveObject(textbox);
     }
 
     function onDelete() {
         editor.canvas.remove(editor.canvas.getActiveObject());
-    }
-
-    function onChangeFontFamily(e) {
-        const textObject = editor.canvas.getActiveObject();
-        textObject.set("fontFamily", e.target.value);
-        editor.canvas.requestRenderAll();
-    }
-
-    function onChangeFontStyle(e) {
-        const textObject = editor.canvas.getActiveObject();
-        textObject.set("fontStyle", e.target.value);
-        editor.canvas.requestRenderAll();
-    }
-
-    function onChangeFontWeight(e) {
-        const textObject = editor.canvas.getActiveObject();
-        textObject.set("fontWeight", e.target.value);
-        editor.canvas.requestRenderAll();
-    }
-
-    function onChangeFontSize(e) {
-        const textObject = editor.canvas.getActiveObject();
-        textObject.set("fontSize", e.target.value);
-        editor.canvas.requestRenderAll();
     }
 
     function onColorChange(e) {
@@ -124,37 +115,36 @@ export default function Home({ auth }) {
         editor.canvas.requestRenderAll();
     }
 
-    function applyFilter(filter) {
-        let activeFilter;
+    const model = new mi.ArbitraryStyleTransferNetwork();
 
-        switch (filter) {
-            case "sepia":
-                activeFilter = new fabric.Image.filters.Sepia();
-                break;
-            case "grayscale":
-                activeFilter = new fabric.Image.filters.Grayscale();
-                break;
-            case "vintage":
-                activeFilter = new fabric.Image.filters.Vintage();
-                break;
-            case "kodachrome":
-                activeFilter = new fabric.Image.filters.Kodachrome();
-                break;
-            case "technicolor":
-                activeFilter = new fabric.Image.filters.Technicolor();
-                break;
-            case "polaroid":
-                activeFilter = new fabric.Image.filters.Polaroid();
-                break;
-            case "invert":
-                activeFilter = new fabric.Image.filters.Invert();
-                break;
-            default:
-                activeFilter = null
+    function stylize(paintingSrc) {
+        const contentImg = new Image();
+        contentImg.width = 650;
+        contentImg.height = 800;
+        contentImg.crossOrigin = "anonymous";
+        contentImg.src = editor.canvas.backgroundImage.getSrc();
+        const styleImg = new Image();
+        styleImg.width = 256;
+        styleImg.height = 256;
+        styleImg.crossOrigin = "anonymous";
+        styleImg.src = paintingSrc;
+
+        if (contentImg.src !== "" && styleImg.src !== "") {
+            setTimeout(()=> {model.stylize(contentImg, styleImg).then((imgData) => {
+                let c = document.createElement("canvas");
+                c.setAttribute("id", "stylized");
+                c.width = 650;
+                c.height = 800;
+                c.getContext("2d").putImageData(imgData, 0, 0);
+                console.log(imgData);
+                fabric.Image.fromURL(c.toDataURL(), (img) => {
+                    editor.canvas.setBackgroundImage(img);
+                    c = null;
+                    editor.canvas.renderAll();
+                });
+            });}, 50);
+            
         }
-        editor.canvas.backgroundImage.filters = [activeFilter]
-        editor.canvas.backgroundImage.applyFilters();
-        editor.canvas.renderAll();
     }
 
     return (
@@ -163,18 +153,15 @@ export default function Home({ auth }) {
                 <div className="col-md-3 sidebar-wrapper">
                     <Sidebar onClickImage={onClickImage} />
                 </div>
-                <div className="col-md-7" style={{ 'padding': '0' }}>
+                <div className="col-md-7" style={{ "padding": "0" }}>
                     <MainContainer onReady={onReady} onAddText={onAddText} onDelete={onDelete} editor={editor}
-                        onChangeFontFamily={ onChangeFontFamily } isText={ isText } onChangeFontStyle={ onChangeFontStyle}
-                        onChangeFontWeight={ onChangeFontWeight } onChangeFontSize={ onChangeFontSize } 
-                        activeColor={ activeColor} onColorChange={ onColorChange } 
-                        applyFilter={ applyFilter }/>
+                        isText={ isText } activeColor={ activeColor} onColorChange={ onColorChange } />
                     <Footer onClick={onClickSaveImage} />
                 </div>
-                <div className="col-md-2" style={{ 'padding': '0' }}>
-                    <StickerSidebar onClickSticker={onClickSticker} />
+                <div className="col-md-2" style={{ "padding": "0" }}>
+                    <StickerSidebar onClickSticker={onClickSticker} onClickPainting={ onClickPainting } />
                 </div>
             </div>
         </div>
-    )
+    );
 }
