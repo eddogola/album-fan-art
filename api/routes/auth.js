@@ -48,7 +48,7 @@ router.get("/current-session", (req, res) => {
 
 router.get("/logout", (req, res) => {
 	req.session = null;
-	const homeURL = encodeURIComponent("http://localhost:3000/");
+	const homeURL = encodeURIComponent(process.env.REACT_APP_HOST);
 	res.redirect(
 		`https://${process.env.AUTH0_DOMAIN}/v2/logout?returnTo=${homeURL}&client_id=${process.env.AUTH0_CLIENT_ID}`
 	);

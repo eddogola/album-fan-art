@@ -58,10 +58,10 @@ export default function StickerSidebar({ onClickSticker, onClickPainting }) {
                 </div>
                 <div className="col-md-6">
                 <a className="btn btn-primary" 
-                    href="http://localhost:3001/auth/logout"
+                    href="/auth/logout"
                     data-bs-toggle="tooltip" 
                     data-bs-placement="bottom"
-                    data-trigger="hover" 
+                    data-trigger="hover"  
                     title="Sign Out">
                         <i className="bi bi-box-arrow-right"></i>
                 </a>

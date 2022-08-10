@@ -7,7 +7,7 @@ export default function CoverGrid({ auth }) {
     const [covers, setCovers] = useState([]);
 
     const getCovers = (nickname) => {
-        axios.get("http://localhost:3001/covers", {
+        axios.get("/covers", {
             params: {
                 nickname: nickname,
             },
